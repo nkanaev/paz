@@ -4,6 +4,7 @@ import shutil
 import stat
 import pwd
 import grp
+import hashlib
 
 
 __version__ = '0.0.1'
@@ -53,6 +54,12 @@ class p(str):
     @property
     def ext(self):
         return os.path.splitext(self)[1][1:]
+
+    def hash(self, name):
+        hasher = getattr(hashlib, name)()
+        with self.open('rb') as f:
+            hasher.update(f.read())
+            return hasher.hexdigest()
 
     def pathmap(self, pattern):
         newpath = ''
