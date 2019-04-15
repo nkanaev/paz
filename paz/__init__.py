@@ -1,6 +1,7 @@
 import os
 import re
 import shutil
+import stat
 
 
 __version__ = '0.0.1'
@@ -79,6 +80,9 @@ class p(str):
         newp = self.pathmap(pattern)
         shutil.move(self, newp, copy_function=copy_function)
         return newp
+
+    def open(self, *args, **kwargs):
+        return open(self, *args, **kwargs)
 
     def __repr__(self):
         return 'p({})'.format(super().__repr__())

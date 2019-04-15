@@ -2,6 +2,12 @@ from unittest.mock import patch
 from paz import p
 
 
+@patch('paz.open')
+def test_open(open):
+    assert p('test/file').open('rb') == open.return_value
+    open.assert_called_once_with('test/file', 'rb')
+
+
 @patch('paz.shutil')
 def test_manipulation_copy(shutil):
     assert p('test/file').copy('{basepath}_backup') == 'test/file_backup'
