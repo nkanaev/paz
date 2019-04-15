@@ -23,6 +23,12 @@ def test_chown(os, pwd, grp):
 
 
 @patch('paz.os')
+def test_chmod(os):
+    p('test/file').chmod(0x777)
+    os.chmod.assert_called_once_with('test/file', 0x777)
+
+
+@patch('paz.os')
 def test_chdir(os):
     p('test/dir').chdir()
     os.chdir.assert_called_once_with('test/dir')

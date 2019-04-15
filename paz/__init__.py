@@ -97,6 +97,9 @@ class p(str):
         # TODO: context processor
         os.chdir(self)
 
+    def chmod(self, mode, **kwargs):
+        os.chmod(self, mode, **kwargs)
+
     def chown(self, owner=None, group=None):
         if not owner and not group:
             raise Exception('provide either "owner" or "group"')
