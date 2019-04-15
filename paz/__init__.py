@@ -63,6 +63,12 @@ class p(str):
                 newpath += part
         return p(newpath)
 
+    def __truediv__(self, other):
+        return p(os.path.join(self, other))
+
+    def __rtruediv__(self, other):
+        return p(os.path.join(other, self))
+
     def copy(self, pattern, copy_metadata=False, follow_symlinks=True):
         newp = self.pathmap(pattern)
         copyfn = shutil.copy if not copy_metadata else shutil.copy2
