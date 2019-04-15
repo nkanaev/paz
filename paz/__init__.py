@@ -5,6 +5,7 @@ import stat
 import pwd
 import grp
 import hashlib
+import datetime
 
 
 __version__ = '0.0.1'
@@ -18,6 +19,14 @@ class p(str):
     @property
     def group(self):
         return grp.getgrgid(os.stat(self).st_gid).gr_name
+
+    @property
+    def last_accessed(self):
+        return datetime.datetime.fromtimestamp(os.path.getatime(self))
+
+    @property
+    def last_modified(self):
+        return datetime.datetime.fromtimestamp(os.path.getmtime(self))
 
     @property
     def exists(self):
