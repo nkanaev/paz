@@ -2,7 +2,7 @@ from unittest.mock import patch
 from paz import p
 
 
-@patch('paz.open')
+@patch('paz.open', create=True)
 def test_hash(open):
     open().__enter__().read.return_value = b'hello world'
     assert p('test/file').hash('md5') == '5eb63bbbe01eeed093cb22bb8f5acdc3'
@@ -15,7 +15,7 @@ def test_chdir(os):
     os.chdir.assert_called_once_with('test/dir')
 
 
-@patch('paz.open')
+@patch('paz.open', create=True)
 def test_open(open):
     assert p('test/file').open('rb') == open.return_value
     open.assert_called_once_with('test/file', 'rb')
