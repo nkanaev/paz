@@ -34,3 +34,9 @@ usage
 
    └──────────────────────┬───────────────────┘
                          path
+
+tests
+-----
+
+.. image:: https://travis-ci.org/nkanaev/paz.svg?branch=master
+    :target: https://travis-ci.org/nkanaev/paz
