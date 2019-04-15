@@ -1,22 +1,39 @@
-import codecs
-from setuptools import setup
+from setuptools import setup, Command
 from setuptools.command.test import test as TestCommand
 
 
 def read(filename):
-    return codecs.open(filename, encoding='utf8').read()
+    return open(filename).read()
 
 
-class PyTest(TestCommand):
+class PyTestCommand(TestCommand):
     user_options = [("pytest-args=", "a", "Arguments to pass to pytest")]
 
-    def initialize_options(self):
-        TestCommand.initialize_options(self)
-        self.pytest_args = ""
-
     def run_tests(self):
-        import shlex, sys, pytest
-        sys.exit(pytest.main(shlex.split(self.pytest_args)))
+        import sys, pytest
+        sys.exit(pytest.main([]))
+
+
+class PublishCommand(Command):
+    user_options = []
+
+    def initialize_options(self):
+        pass
+
+    def finalize_options(self):
+        pass
+
+    def info(self, s):
+        print('\n\n', s, end='\n---\n', sep='')
+
+    def run(self):
+        import os, sys
+        self.info('Building Source and Wheel (universal) distribution...')
+        os.system('python3 setup.py sdist bdist_wheel --universal')
+
+        self.info('Uploading the package to PyPi via Twine...')
+        os.system('twine upload dist/*')
+        sys.exit()
 
 
 setup(
@@ -40,5 +57,5 @@ setup(
     ],
     test_suite='tests',
     tests_require=['pytest'],
-    cmdclass={"test": PyTest},
+    cmdclass={"test": PyTestCommand, 'publish': PublishCommand},
 )
