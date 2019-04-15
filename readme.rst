@@ -1,7 +1,7 @@
 paz
 ===
 
-**paz** is a simple path manipulation library, which wraps `os.path` & `shutil` modules.
+**paz** is a simple path manipulation library, which wraps ``os.path`` & ``shutil`` modules.
 
 
 usage
