@@ -11,6 +11,9 @@ import datetime
 __version__ = '0.0.1'
 
 
+FILE_PARTS = {'dirname', 'basename', 'ext', 'filename', 'basepath', 'path'}
+
+
 class p(str):
     @property
     def owner(self):
@@ -83,7 +86,7 @@ class p(str):
         for part in re.split(r'({\w+})', pattern):
             if part.startswith('{') and part.endswith('}'):
                 part = part[1:-1]
-                if not hasattr(self, part):
+                if part not in FILE_PARTS:
                     raise ValueError('unknown pathmap specifier "{}" in "{}"'.format(part, pattern))
                 newpath += getattr(self, part)
             else:
