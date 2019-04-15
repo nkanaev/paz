@@ -1,11 +1,28 @@
 import os
 import re
+import shutil
 
 
 __version__ = '0.0.1'
 
 
 class p(str):
+    @property
+    def exists(self):
+        return os.path.exists(self)
+
+    @property
+    def is_dir(self):
+        return os.path.isdir(self)
+
+    @property
+    def is_file(self):
+        return os.path.isfile(self)
+
+    @property
+    def is_link(self):
+        return os.path.islink(self)
+
     @property
     def fullpath(self):
         return p(os.path.abspath(os.path.expanduser(self)))
@@ -45,3 +62,17 @@ class p(str):
             else:
                 newpath += part
         return p(newpath)
+
+    def copy(self, pattern, copy_metadata=False, follow_symlinks=True):
+        newp = self.pathmap(pattern)
+        copyfn = shutil.copy if not copy_metadata else shutil.copy2
+        copyfn(self, newp, follow_symlinks=follow_symlinks)
+        return newp
+
+    def move(self, pattern, copy_function=None):
+        newp = self.pathmap(pattern)
+        shutil.move(self, newp, copy_function=copy_function)
+        return newp
+
+    def __repr__(self):
+        return 'p({})'.format(super().__repr__())
