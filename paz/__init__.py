@@ -12,6 +12,14 @@ __version__ = '0.0.1'
 
 class p(str):
     @property
+    def owner(self):
+        return pwd.getpwuid(os.stat(self).st_uid).pw_name
+
+    @property
+    def group(self):
+        return grp.getgrgid(os.stat(self).st_gid).gr_name
+
+    @property
     def exists(self):
         return os.path.exists(self)
 
