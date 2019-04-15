@@ -2,6 +2,8 @@ import os
 import re
 import shutil
 import stat
+import pwd
+import grp
 
 
 __version__ = '0.0.1'
@@ -83,6 +85,20 @@ class p(str):
 
     def open(self, *args, **kwargs):
         return open(self, *args, **kwargs)
+
+    def chdir(self):
+        # TODO: context processor
+        os.chdir(self)
+
+    def chown(self, owner=None, group=None):
+        if not owner and not group:
+            raise Exception('provide either "owner" or "group"')
+        uid, gid = owner, group
+        if isinstance(uid, str):
+            uid = pwd.getpwuid(uid).pw_uid
+        if isinstance(gid, str):
+            gid = grp.getgrnam(gid).gr_gid
+        return os.chown(self, uid, gid)
 
     def __repr__(self):
         return 'p({})'.format(super().__repr__())
