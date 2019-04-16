@@ -6,6 +6,7 @@ import pwd
 import grp
 import hashlib
 import datetime
+import fnmatch
 
 
 __version__ = '0.0.1'
@@ -13,15 +14,25 @@ __version__ = '0.0.1'
 
 FILE_PARTS = {'dirname', 'basename', 'ext', 'filename', 'basepath', 'path'}
 
+FILE_TYPES = {
+    stat.S_IFBLK: "blockdev",
+    stat.S_IFCHR: "chardev",
+    stat.S_IFDIR: "dir",
+    stat.S_IFIFO: "fifo",
+    stat.S_IFLNK: "link",
+    stat.S_IFREG: "file",
+    stat.S_IFSOCK: "socket",
+}
+
 
 class p(str):
     @property
     def owner(self):
-        return pwd.getpwuid(os.stat(self).st_uid).pw_name
+        return pwd.getpwuid(os.lstat(self).st_uid).pw_name
 
     @property
     def group(self):
-        return grp.getgrgid(os.stat(self).st_gid).gr_name
+        return grp.getgrgid(os.lstat(self).st_gid).gr_name
 
     @property
     def last_accessed(self):
@@ -46,6 +57,10 @@ class p(str):
     @property
     def is_link(self):
         return os.path.islink(self)
+
+    @property
+    def type(self):
+        return FILE_TYPES.get(stat.S_IFMT(os.lstat(self).st_mode), 'unknown')
 
     @property
     def fullpath(self):
@@ -75,12 +90,6 @@ class p(str):
     def ext(self):
         return os.path.splitext(self)[1][1:]
 
-    def hash(self, name):
-        hasher = getattr(hashlib, name)()
-        with self.open('rb') as f:
-            hasher.update(f.read())
-            return hasher.hexdigest()
-
     def pathmap(self, pattern):
         newpath = ''
         for part in re.split(r'({\w+})', pattern):
@@ -92,6 +101,25 @@ class p(str):
             else:
                 newpath += part
         return p(newpath)
+
+    def hash(self, name):
+        hasher = getattr(hashlib, name)()
+        with self.open('rb') as f:
+            hasher.update(f.read())
+            return hasher.hexdigest()
+
+    def find(self, include=None, exclude=None, type=None):
+        for root, dirs, files in os.walk(self):
+            for sub in [dirs, files]:
+                for n in sub:
+                    newp = p(os.path.join(root, n))
+                    if include and not fnmatch.fnmatch(newp, include):
+                        continue
+                    if exclude and fnmatch.fnmatch(newp, exclude):
+                        continue
+                    if type and newp.type != type:
+                        continue
+                    yield newp
 
     def __truediv__(self, other):
         return p(os.path.join(self, other))
