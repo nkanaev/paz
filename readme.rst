@@ -1,8 +1,10 @@
 paz
 ===
 
-**paz** is a simple path manipulation library, which wraps ``os.path`` & ``shutil`` modules.
+**paz** is a small, versatile library for path string manipulation.
 
+It is a wrapper around ``os``, ``os.path``, ``shutil`` and many other built-in modules,
+which simplifies path management operations.
 
 usage
 -----
@@ -11,29 +13,39 @@ usage
 
     from paz import p
 
-    p('/path/to/any/file.ext')
+    image_dir = p('/Users/nkanaev/Pictures')
+    for image_file in image_dir.find('*.jpg', type='file'):
+        image_file.move('{basepath}_backup.{ext}')
 
+The same code without ``paz``:
 
-    # *p* is a subclass of *str* and can be manipulated like a regular string:
+.. code:: python
 
-    p('images/lenna.png').split('/')  # returns: ['images', 'lenna.png']
+    import os
+    import shutil
 
+    for root, dirs, files in os.walk('/Users/nkanaev/Pictures'):
+        for file in files:
+            if file.endswith('.png'):
+                basename = os.path.splitext(file)[0]
+                src_path = os.path.join(root, file)
+                dst_path = os.path.join(root, basename + '_backup.png')
+                shutil.copy(src_path, dst_path)
 
-.. code:: text
+docs
+----
 
-   /home/username/pics/portrait-of-madame-x.png
+The library provides only one class - ``paz.p``.
+It is a subclass of ``str``, so it's instances can be manipulated like regular strings.
+On top of that, ``paz.p`` provides a few commonly used operations:
 
-   └────────┬────────┘ └─────────┬────────┘ └┬┘
-         dirname              basename      ext
+* information: ``owner``, ``group``, ``is_dir``, ``is_file``,
+  ``is_link``, ``exists``, ``type``, ``last_accessed``, ``last_modified``
+* utility: ``copy()``, ``move()``, ``chown()``, ``chmod()``, ``hash()``
+* manipulation: ``pathmap()`` & readable path joins (ex.: ``image_dir / 'wallpapers'``)
 
-                       └───────────┬──────────┘
-                               filename
-
-   └───────────────────┬──────────────────┘
-                   basepath
-
-   └──────────────────────┬───────────────────┘
-                         path
+The result is an object-oriented, "pythonic" object that makes
+file-related operations easy without breaking the existing data types.
 
 tests
 -----
