@@ -29,7 +29,7 @@ class PublishCommand(Command):
     def run(self):
         import os, sys
         self.info('Building Source and Wheel (universal) distribution...')
-        os.system('python3 setup.py sdist bdist_wheel --universal')
+        os.system('python3 setup.py sdist bdist_wheel')
 
         self.info('Uploading the package to PyPi via Twine...')
         os.system('twine upload dist/*')
@@ -44,7 +44,7 @@ setup(
     author='Nazar Kanaev',
     author_email='nkanaev@live.com',
     url='https://github.com/nkanaev/paz',
-    py_modules=['paz'],
+    packages=['paz'],
     include_package_data=True,
     license='MIT',
     zip_safe=False,
