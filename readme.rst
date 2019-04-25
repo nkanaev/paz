@@ -39,10 +39,11 @@ The library provides only one class - ``paz.p``.
 It is a subclass of ``str``, so it's instances can be manipulated like regular strings.
 On top of that, ``paz.p`` provides a few commonly used operations:
 
-* information: ``owner``, ``group``, ``is_dir``, ``is_file``,
+* file system information: ``owner``, ``group``, ``is_dir``, ``is_file``,
   ``is_link``, ``exists``, ``type``, ``last_accessed``, ``last_modified``
-* utility: ``copy()``, ``move()``, ``chown()``, ``chmod()``, ``hash()``
-* manipulation: ``pathmap()`` & readable path joins (ex.: ``image_dir / 'wallpapers'``)
+* path parts extraction: ``filename``, ``basename``, ``ext``, ``dirname``, ``basepath``, ``path``, ``fullpath``
+* utility operations: ``copy()``, ``move()``, ``chown()``, ``chmod()``, ``hash()``
+* path string manipulation: ``pathmap()`` & readable path joins (ex.: ``image_dir / 'wallpapers'``)
 
 The result is an object-oriented, "pythonic" object that makes
 file-related operations easy without breaking the existing data types.
