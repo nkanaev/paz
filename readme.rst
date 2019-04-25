@@ -30,7 +30,7 @@ The same code without ``paz``:
                 basename = os.path.splitext(file)[0]
                 src_path = os.path.join(root, file)
                 dst_path = os.path.join(root, basename + '_backup.png')
-                shutil.copy(src_path, dst_path)
+                shutil.move(src_path, dst_path)
 
 docs
 ----
