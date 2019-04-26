@@ -31,5 +31,5 @@ setup(
     ],
     test_suite='tests',
     tests_require=['pytest'],
-    cmdclass={"test": PyTestCommand, 'publish': PublishCommand},
+    cmdclass={"test": PyTestCommand},
 )
