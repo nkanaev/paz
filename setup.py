@@ -13,7 +13,7 @@ class PyTestCommand(TestCommand):
 setup(
     name='paz',
     version='0.0.1',
-    description='simple path manipulation library',
+    description='path manipulation swiss army knife',
     long_description=open('readme.rst').read(),
     author='Nazar Kanaev',
     author_email='nkanaev@live.com',
