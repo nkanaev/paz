@@ -10,7 +10,7 @@ import datetime
 import fnmatch
 
 
-__version__ = '0.0.1'
+__version__ = '0.0.2'
 
 
 FILE_PARTS = {'dirname', 'basename', 'ext', 'filename', 'basepath', 'path'}

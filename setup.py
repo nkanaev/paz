@@ -12,17 +12,14 @@ class PyTestCommand(TestCommand):
 
 setup(
     name='paz',
-    version='0.0.1',
+    version='0.0.2',
     description='path manipulation swiss army knife',
-    long_description=open('readme.rst').read(),
+    long_description=open('README.rst').read(),
     author='Nazar Kanaev',
     author_email='nkanaev@live.com',
     url='https://github.com/nkanaev/paz',
     packages=['paz'],
-    package_data={'': ['readme.rst']},
-    include_package_data=True,
     license='MIT',
-    zip_safe=False,
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
