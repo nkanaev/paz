@@ -19,6 +19,7 @@ setup(
     author_email='nkanaev@live.com',
     url='https://github.com/nkanaev/paz',
     packages=['paz'],
+    package_data={'': ['readme.rst']},
     include_package_data=True,
     license='MIT',
     zip_safe=False,
