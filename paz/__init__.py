@@ -26,7 +26,7 @@ FILE_TYPES = {
 }
 
 
-class p(str):
+class pazmixin:
     @property
     def owner(self):
         """Path owner string."""
@@ -209,3 +209,17 @@ class p(str):
 
     def __repr__(self):
         return 'p({})'.format(super().__repr__())
+
+
+class pazbytes(pazmixin, bytes):
+    pass
+
+
+class pazstr(pazmixin, str):
+    pass
+
+
+def p(input):
+    if isinstance(input, bytes):
+        return pazbytes(input)
+    return pazstr(input)
