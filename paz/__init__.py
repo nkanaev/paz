@@ -222,4 +222,7 @@ class pazstr(pazmixin, str):
 def p(input):
     if isinstance(input, bytes):
         return pazbytes(input)
-    return pazstr(input)
+    elif isinstance(input, str):
+        return pazstr(input)
+    else:
+        raise TypeError('unsupported type: %s' % type(input))
