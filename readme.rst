@@ -35,9 +35,10 @@ The same code without ``paz``:
 docs
 ----
 
-The library provides only one class - ``paz.p``.
-It is a subclass of ``str``, so it's instances can be manipulated like regular strings.
-On top of that, ``paz.p`` provides a few commonly used operations:
+The library provides only one function - ``paz.p``.
+It returns a subclass of ``str``/``bytes`` depending on the input,
+which can be manipulated like a regular string.
+On top of that,  provides a few commonly used operations:
 
 * file system information: ``owner``, ``group``, ``is_dir``, ``is_file``,
   ``is_link``, ``exists``, ``type``, ``last_accessed``, ``last_modified``
