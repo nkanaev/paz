@@ -1,4 +1,4 @@
-paz123
+paz
 ===
 
 **paz** is a small, versatile library for path string manipulation.
