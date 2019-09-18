@@ -14,7 +14,7 @@ usage
     from paz import p
 
     image_dir = p('/Users/nkanaev/Pictures')
-    for image_file in image_dir.find('*.jpg', type='file'):
+    for image_file in image_dir.walk('*.jpg', type='file'):
         image_file.move('{basepath}_backup.{ext}')
 
 The same code without ``paz``:

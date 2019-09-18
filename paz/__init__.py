@@ -142,7 +142,7 @@ class pazmixin:
             hasher.update(f.read())
             return hasher.hexdigest()
 
-    def find(self, include=None, exclude=None, type=None):
+    def walk(self, include=None, exclude=None, type=None):
         """Returns a generator which recursively descends the directory tree
         yielding matching paths.
         """

@@ -1,5 +1,6 @@
+import inspect
 from unittest.mock import patch
-from paz import p
+from paz import p, pazmixin
 
 
 @patch('paz.open', create=True)
@@ -19,3 +20,13 @@ def test_chdir(os):
 def test_open(open):
     assert p('test/file').open('rb') == open.return_value
     open.assert_called_once_with('test/file', 'rb')
+
+
+def test_api():
+    is_method_or_property = lambda x: inspect.isfunction(x) or inspect.isdatadescriptor(x)
+
+    for klass in (str, bytes):
+        for attr, _ in inspect.getmembers(pazmixin, predicate=is_method_or_property):
+            if attr.startswith('__'):
+                continue
+            assert not hasattr(klass, attr), '"%s" is overriden for %s' % (attr, klass)
