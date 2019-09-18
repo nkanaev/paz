@@ -13,7 +13,7 @@ usage
 
     from paz import p
 
-    image_dir = p('/Users/nkanaev/Pictures')
+    image_dir = p('/home/username/pics')
     for image_file in image_dir.walk('*.jpg', type='file'):
         image_file.move('{basepath}_backup.{ext}')
 
@@ -24,7 +24,7 @@ The same code without ``paz``:
     import os
     import shutil
 
-    for root, dirs, files in os.walk('/Users/nkanaev/Pictures'):
+    for root, dirs, files in os.walk('/home/username/pics'):
         for file in files:
             if file.endswith('.png'):
                 basename = os.path.splitext(file)[0]
