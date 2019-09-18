@@ -1,0 +1,22 @@
+[tool.poetry]
+name        = "paz"
+version     = "0.1.0"
+description = "path manipulation swiss army knife"
+readme      = "readme.rst"
+repository  = "https://github.com/nkanaev/paz"
+authors     = ["Nazar Kanaev <nkanaev@live.com>"]
+license     = "MIT"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+]
+
+[tool.poetry.dependencies]
+python = "^3.4"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
