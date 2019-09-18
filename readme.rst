@@ -47,6 +47,23 @@ On top of that, an instance provides a few commonly used operations:
 * utility operations: ``copy()``, ``move()``, ``chown()``, ``chmod()``, ``hash()``
 * path string manipulation: ``pathmap()`` & readable path joins (ex.: ``image_dir / 'wallpapers'``)
 
+``pathmap``, ``copy`` & ``move`` support substituting path parts between ``{`` and ``}``
+with the corresponding values. The full diagram of path parts is provided below:
+
+.. code:: text
+
+    /home/username/pics/portrait-of-madame-x.png
+
+    └────────┬────────┘ └─────────┬────────┘ └┬┘
+          dirname              basename      ext
+                        └───────────┬──────────┘
+                                filename
+    └───────────────────┬──────────────────┘
+                    basepath
+    └──────────────────────┬───────────────────┘
+                         path
+
+
 tests
 -----
 
