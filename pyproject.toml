@@ -6,6 +6,7 @@ readme      = "readme.rst"
 repository  = "https://github.com/nkanaev/paz"
 authors     = ["Nazar Kanaev <nkanaev@live.com>"]
 license     = "MIT"
+include     = ["readme.rst", "license"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
