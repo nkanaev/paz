@@ -1,6 +1,6 @@
 [tool.poetry]
 name        = "paz"
-version     = "0.1.0"
+version     = "0.1.1"
 description = "path manipulation swiss army knife"
 readme      = "readme.rst"
 repository  = "https://github.com/nkanaev/paz"
