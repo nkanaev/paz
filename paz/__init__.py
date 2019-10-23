@@ -135,11 +135,11 @@ class pazmixin:
                 newpath += part
         return p(newpath)
 
-    def hash(self, name):
+    def hash(self, name, size=-1):
         """Hash string of the file using the provided hash algorithm."""
         hasher = getattr(hashlib, name)()
         with self.open('rb') as f:
-            hasher.update(f.read())
+            hasher.update(f.read(size))
             return hasher.hexdigest()
 
     def walk(self, include=None, exclude=None, type=None):
