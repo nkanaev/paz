@@ -67,5 +67,5 @@ with the corresponding values. The full diagram of path parts is provided below:
 tests
 -----
 
-.. image:: https://travis-ci.org/nkanaev/paz.svg?branch=master
-    :target: https://travis-ci.org/nkanaev/paz
+.. image:: https://github.com/nkanaev/paz/workflows/test/badge.svg
+    :target: https://github.com/nkanaev/paz/actions
